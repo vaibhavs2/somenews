@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 import type {News} from '../types';
 
 type Props = {|
@@ -43,7 +43,14 @@ export default function NewsItems(props: Props): Node {
     news.author?.indexOf(',') === -1 ? undefined : news.author?.indexOf(',');
   const author = news.author?.substr(0, index);
 
+  /**
+   * show single latest comment below , and after fetching the latest comment each time we 
+   * should append them in store each time, may be persist them to show the cached comments when user os offline
+   * , it would be better to refresh it to new comment when user comes oneline and remove cached comments 
+   * and again start caching as comments comes and persist tnem.
+   */
   return (
+    <View> 
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.7}
@@ -61,6 +68,13 @@ export default function NewsItems(props: Props): Node {
       </View>
       <Image source={{uri: news.urlToImage}} style={styles.image} />
     </TouchableOpacity>
+    <TouchableWithoutFeedback>
+    <Text
+    numberOfLines={3}
+    ellipsizeMode = 'tail'
+    >Comments</Text>
+    </TouchableWithoutFeedback>
+    </View>
   );
 }
 

@@ -26,6 +26,7 @@ export default function Chips(props: Props): Node {
         ]}>
         {props.text}
       </Text>
+      <View style={styles.pinned}/>
     </TouchableWithoutFeedback>
   );
 }
@@ -40,4 +41,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
+  pinned:{
+   position:'absolute',
+   end:'0',
+   top:0,
+   bottom:0,
+   width:4,
+   height:4,
+   borderRadius:1,
+   backgroundColor:'black' 
+  }
 });
